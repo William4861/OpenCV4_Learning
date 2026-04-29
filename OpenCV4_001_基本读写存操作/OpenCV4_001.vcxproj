@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{46535f20-8b4c-47c1-960d-b0e9b236914d}</ProjectGuid>
+    <ProjectGuid>{AE542B54-9695-4D12-ACFB-6365F9536DCB}</ProjectGuid>
     <RootNamespace>OpenCVLearning</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>OpenCV4_001</ProjectName>
+    <ProjectName>001_基本读写存操作</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

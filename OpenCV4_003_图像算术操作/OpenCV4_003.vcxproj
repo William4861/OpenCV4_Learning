@@ -24,7 +24,7 @@
     <ProjectGuid>{538e73f7-280a-4984-ab79-4464172b0a54}</ProjectGuid>
     <RootNamespace>OpenCV003</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>OpenCV4_003</ProjectName>
+    <ProjectName>003_图像算术操作</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

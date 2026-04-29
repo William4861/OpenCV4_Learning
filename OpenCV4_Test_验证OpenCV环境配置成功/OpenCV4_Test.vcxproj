@@ -24,7 +24,7 @@
     <ProjectGuid>{14fe8daf-f65a-48d4-b61b-7d575576bff6}</ProjectGuid>
     <RootNamespace>OpenCVTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>OpenCV4_Test</ProjectName>
+    <ProjectName>Test_验证OpenCV环境配置成功</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

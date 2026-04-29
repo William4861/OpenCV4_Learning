@@ -24,6 +24,7 @@
     <ProjectGuid>{72b07ec4-7933-4a07-bf6d-376e39f0bd3e}</ProjectGuid>
     <RootNamespace>OpenCV4004</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>004_图像位操作</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
