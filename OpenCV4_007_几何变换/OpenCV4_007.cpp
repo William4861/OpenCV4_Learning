@@ -49,6 +49,15 @@ int main(int argc, char** argv) {
 	warpAffine(src, dst4, affinMatrix, src.size());
 	imshow("dst4", dst4);
 
+	//先获取透视（投射）变换前后对应的点数组，然后获取透视（投射）变换矩阵
+	vector<Point2f> pts3 = { {12,15},{9,88},{99,17},{95,97} };
+	vector<Point2f> pts4 = { {10,10},{10,100},{100,10},{100,100} };
+	Mat perspectiveMatrix = getPerspectiveTransform(pts3, pts4);
+	//进行投射变换
+	Mat dst5;
+	warpPerspective(src, dst5, perspectiveMatrix, src.size());
+	imshow("dst5", dst5);
+
 	waitKey(0);
 	destroyAllWindows();
 	return 0;
