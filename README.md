@@ -1,1 +1,2 @@
-# OpenCV_Learning
+# OpenCV4_Learning
+记录自己学习OpenCV4_的过程
