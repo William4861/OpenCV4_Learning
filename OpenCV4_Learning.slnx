@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="OpenCV4_004/OpenCV4_004.vcxproj" Id="72b07ec4-7933-4a07-bf6d-376e39f0bd3e" />
+  <Project Path="OpenCV4_005/OpenCV4_005.vcxproj" Id="0bb5fac0-47b9-4592-ba19-8320e796eb76" />
+  <Project Path="OpenCV4_006/OpenCV4_006.vcxproj" Id="240a8d22-34f4-43a8-be50-6a3aab3dfcab" />
+  <Project Path="OpenCV4_007_几何变换/OpenCV4_007_几何变换.vcxproj" Id="933186d8-d2f5-4365-ac22-a4a98f267dcd" />
+  <Project Path="OpenCV_002/OpenCV_002.vcxproj" Id="791e0f64-84a3-4894-b37b-0be4fb224f90" />
+  <Project Path="OpenCV_003/OpenCV_003.vcxproj" Id="538e73f7-280a-4984-ab79-4464172b0a54" />
+  <Project Path="OpenCV_Learning/OpenCV_Learning.vcxproj" Id="46535f20-8b4c-47c1-960d-b0e9b236914d" />
+  <Project Path="OpenCV_Test/OpenCV_Test.vcxproj" Id="14fe8daf-f65a-48d4-b61b-7d575576bff6" />
+</Solution>
