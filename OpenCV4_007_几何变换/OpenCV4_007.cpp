@@ -58,6 +58,13 @@ int main(int argc, char** argv) {
 	warpPerspective(src, dst5, perspectiveMatrix, src.size());
 	imshow("dst5", dst5);
 
+	//向上/向下采样操作
+	Mat dst6,dst7;
+	pyrUp(src, dst6);
+	pyrDown(src, dst7);
+	imshow("dst6", dst6);
+	imshow("dst7", dst7);
+
 	waitKey(0);
 	destroyAllWindows();
 	return 0;
