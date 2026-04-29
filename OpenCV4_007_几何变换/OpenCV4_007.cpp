@@ -16,7 +16,6 @@ int main(int argc, char** argv) {
 	Mat dst;
 	resize(src, dst, Size(src.rows * 2, src.cols * 2));
 	imshow("dst", dst);
-
 	//缩小图像
 	Mat dst1;
 	resize(src, dst1, Size(), 0.5, 0.5);
