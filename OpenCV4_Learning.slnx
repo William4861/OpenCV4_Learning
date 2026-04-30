@@ -3,13 +3,13 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="001_基本读写存操作/OpenCV4_001.vcxproj" Id="ae542b54-9695-4d12-acfb-6365f9536dcb" />
+  <Project Path="002_Mat类的属性、构造、遍历/OpenCV4_002.vcxproj" Id="791e0f64-84a3-4894-b37b-0be4fb224f90" />
+  <Project Path="003_图像算术操作/OpenCV4_003.vcxproj" Id="538e73f7-280a-4984-ab79-4464172b0a54" />
+  <Project Path="004_图像位操作/OpenCV4_004.vcxproj" Id="72b07ec4-7933-4a07-bf6d-376e39f0bd3e" />
+  <Project Path="005_画图和写字操作/OpenCV4_005.vcxproj" Id="0bb5fac0-47b9-4592-ba19-8320e796eb76" />
+  <Project Path="006_颜色空间转换/OpenCV4_006.vcxproj" Id="240a8d22-34f4-43a8-be50-6a3aab3dfcab" />
+  <Project Path="007_几何变换/OpenCV4_007_几何变换.vcxproj" Id="933186d8-d2f5-4365-ac22-a4a98f267dcd" />
   <Project Path="008_形态学操作/008_形态学操作.vcxproj" Id="06291fec-2887-4115-8494-790a2837a5a5" />
-  <Project Path="OpenCV4_001_基本读写存操作/OpenCV4_001.vcxproj" Id="ae542b54-9695-4d12-acfb-6365f9536dcb" />
-  <Project Path="OpenCV4_002_Mat类的属性、构造、遍历/OpenCV4_002.vcxproj" Id="791e0f64-84a3-4894-b37b-0be4fb224f90" />
-  <Project Path="OpenCV4_003_图像算术操作/OpenCV4_003.vcxproj" Id="538e73f7-280a-4984-ab79-4464172b0a54" />
-  <Project Path="OpenCV4_004_图像位操作/OpenCV4_004.vcxproj" Id="72b07ec4-7933-4a07-bf6d-376e39f0bd3e" />
-  <Project Path="OpenCV4_005_画图和写字操作/OpenCV4_005.vcxproj" Id="0bb5fac0-47b9-4592-ba19-8320e796eb76" />
-  <Project Path="OpenCV4_006_颜色空间转换/OpenCV4_006.vcxproj" Id="240a8d22-34f4-43a8-be50-6a3aab3dfcab" />
-  <Project Path="OpenCV4_007_几何变换/OpenCV4_007_几何变换.vcxproj" Id="933186d8-d2f5-4365-ac22-a4a98f267dcd" />
-  <Project Path="OpenCV4_Test_验证OpenCV环境配置成功/OpenCV4_Test.vcxproj" Id="14fe8daf-f65a-48d4-b61b-7d575576bff6" />
+  <Project Path="Test_验证OpenCV环境配置成功/OpenCV4_Test.vcxproj" Id="14fe8daf-f65a-48d4-b61b-7d575576bff6" />
 </Solution>
