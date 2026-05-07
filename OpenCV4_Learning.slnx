@@ -10,8 +10,7 @@
   <Project Path="005_画图和写字操作/OpenCV4_005.vcxproj" Id="0bb5fac0-47b9-4592-ba19-8320e796eb76" />
   <Project Path="006_颜色空间转换/OpenCV4_006.vcxproj" Id="240a8d22-34f4-43a8-be50-6a3aab3dfcab" />
   <Project Path="007_几何变换/OpenCV4_007_几何变换.vcxproj" Id="933186d8-d2f5-4365-ac22-a4a98f267dcd" />
-  <Project Path="008_图像平滑/008_图像平滑.vcxproj" Id="4a9be5a8-113c-4129-bb39-6f4c28b0d144" />
   <Project Path="008_形态学操作/008_形态学操作.vcxproj" Id="06291fec-2887-4115-8494-790a2837a5a5" />
-  <Project Path="009_图像平滑/009_图像平滑.vcxproj" Id="454154d7-c869-4c3d-804e-36ec80c68ec7" />
+  <Project Path="009_图像平滑操作/009_图像平滑操作.vcxproj" Id="63ba026e-0d09-42c7-ac8a-2c7ebc4afcfb" />
   <Project Path="Test_验证OpenCV环境配置成功/OpenCV4_Test.vcxproj" Id="14fe8daf-f65a-48d4-b61b-7d575576bff6" />
 </Solution>

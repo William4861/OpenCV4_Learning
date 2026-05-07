@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{454154d7-c869-4c3d-804e-36ec80c68ec7}</ProjectGuid>
-    <RootNamespace>My009图像平滑</RootNamespace>
+    <ProjectGuid>{63ba026e-0d09-42c7-ac8a-2c7ebc4afcfb}</ProjectGuid>
+    <RootNamespace>My009图像平滑操作</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -128,11 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\008_图像平滑\OpenCV4_009.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\GaussianSample.png" />
-    <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\SpicySaltSample.png" />
+    <ClCompile Include="OpenCV4_009.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
