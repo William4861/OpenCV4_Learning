@@ -30,6 +30,17 @@ int main(int argc, char** argv) {
 	addWeighted(absX, 0.5, absY, 0.5, 0, horseScharRes);//合并
 	imshow("horseScharRes", horseScharRes);
 
+	//Laplacian边缘检测
+	Mat horseLaplacianRes;
+	Laplacian(horse, horseLaplacianRes, CV_16S);
+	convertScaleAbs(horseLaplacianRes, horseLaplacianRes);
+	imshow("horseLaplacianRes",horseLaplacianRes);
+
+	//Canny边缘检测：效果最好
+	Mat horseCannyRes;
+	Canny(horse, horseCannyRes, 0, 100);
+	imshow("horseCannyRes", horseCannyRes);
+
 
 	waitKey(0);
 	destroyAllWindows();
