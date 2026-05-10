@@ -3,6 +3,18 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/MyPhotos/">
+    <File Path="MyPhotos/Calendar.png" />
+    <File Path="MyPhotos/CloseSample.png" />
+    <File Path="MyPhotos/EualizeHistSample.png" />
+    <File Path="MyPhotos/GaussianSample.png" />
+    <File Path="MyPhotos/Horse.png" />
+    <File Path="MyPhotos/OpenSample.png" />
+    <File Path="MyPhotos/Planets.png" />
+    <File Path="MyPhotos/SpicySaltSample.png" />
+    <File Path="MyPhotos/Wulin.png" />
+    <File Path="MyPhotos/WulinTemplate.png" />
+  </Folder>
   <Folder Name="/解决方案项/">
     <File Path="OpenCV常用函数速查手册.md" />
   </Folder>

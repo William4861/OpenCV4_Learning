@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 	imshow("dilateResult", dilateRes);
 
 	//开运算操作 效果：消除白噪点
-	Mat openSample = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/OpenSample.png");
+	Mat openSample = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/OpenSample.png");
 	Mat kernel1 = (Mat_<uchar>::ones(Size(20, 20)));//先创建20*20的核结构
 	Mat openRes;
 	morphologyEx(openSample, openRes, MORPH_OPEN ,kernel1);//进行开运算
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 	imshow("openResult", openRes);
 	
 	//闭运算 效果：填充孔洞
-	Mat closeSample = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/CloseSample.png");
+	Mat closeSample = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/CloseSample.png");
 	Mat closeRes;
 	morphologyEx(closeSample, closeRes, MORPH_CLOSE, kernel1);//进行闭运算
 	imshow("closeSample", closeSample);

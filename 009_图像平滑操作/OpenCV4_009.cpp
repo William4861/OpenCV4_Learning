@@ -7,9 +7,9 @@ using namespace cv;
 //图像平滑
 
 int main(int argc, char** argv) {
-	Mat dogSp = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/SpicySaltSample.png");//图像路径必须全英文，否则会读取空图像，后续报错
+	Mat dogSp = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/SpicySaltSample.png");//图像路径必须全英文，否则会读取空图像，后续报错
 	imshow("dogSp", dogSp);
-	Mat dogGaus = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/GaussianSample.png");//输入参数：输入图像、输出图像、核大小
+	Mat dogGaus = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/GaussianSample.png");//输入参数：输入图像、输出图像、核大小
 	imshow("dogGaus", dogGaus);
 
 	//均值滤波

@@ -9,8 +9,8 @@ using namespace cv;
 
 int main(int argc, char** argv) {
 	//模板匹配
-	Mat wulin = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/Wulin.png");
-	Mat wulinTemplate = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/WulinTemplate.png");
+	Mat wulin = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Wulin.png");
+	Mat wulinTemplate = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/WulinTemplate.png");
 	imshow("wulin", wulin);
 	imshow("wulinTemplate", wulinTemplate);
 
@@ -25,8 +25,8 @@ int main(int argc, char** argv) {
 	rectangle(wulin, topLeft, buttomRight, Scalar(0, 255, 0));
 	imshow("wulinMatchRes", wulin);
 
-	//霍夫变换
-	Mat calendar = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/Calendar.png");
+	//霍夫线检测
+	Mat calendar = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Calendar.png");
 	imshow("Calendar", calendar);
 	Mat gray;
 	cvtColor(calendar, gray, COLOR_BGR2GRAY);
@@ -47,6 +47,9 @@ int main(int argc, char** argv) {
 		line(calendar, p1, p2, Scalar(0, 0, 255), 2);
 	}
 	imshow("calendarHoughRes", calendar);
+
+	//霍夫圆检测
+	Mat planets = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Planets.png");
 
 	waitKey(0);
 	destroyAllWindows();

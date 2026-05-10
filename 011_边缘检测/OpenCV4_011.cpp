@@ -7,7 +7,7 @@ using namespace cv;
 //边缘检测
 
 int main(int argc, char** argv) {
-	Mat horse = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/Horse.png",0);
+	Mat horse = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Horse.png",0);
 	imshow("horse", horse);
 
 	//Sobel边缘检测

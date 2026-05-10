@@ -7,7 +7,7 @@ using namespace cv;
 //直方图操作
 
 int main(int argc, char** argv) {
-	Mat equalSample = imread("D:/code_work/opencv/sources/samples/data/MyPhotos/EualizeHistSample.png",IMREAD_GRAYSCALE);
+	Mat equalSample = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/EualizeHistSample.png",IMREAD_GRAYSCALE);
 	imshow("equalSample", equalSample);
 
 	//绘制图像直方图

@@ -131,8 +131,8 @@
     <ClCompile Include="OpenCV4_008.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\CloseSample.png" />
-    <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\OpenSample.png" />
+    <Image Include="..\MyPhotos\CloseSample.png" />
+    <Image Include="..\MyPhotos\OpenSample.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

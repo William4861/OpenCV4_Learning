@@ -19,4 +19,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\MyPhotos\GaussianSample.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\MyPhotos\SpicySaltSample.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
