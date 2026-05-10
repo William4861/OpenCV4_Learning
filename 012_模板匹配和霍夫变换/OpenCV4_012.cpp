@@ -50,6 +50,16 @@ int main(int argc, char** argv) {
 
 	//霍夫圆检测
 	Mat planets = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Planets.png");
+	cvtColor(planets, gray, COLOR_BGR2GRAY);
+	Mat temp;
+	medianBlur(gray, temp, 3);
+	imshow("planetsMedianBlur", temp);
+	vector<Vec3f> circles;
+	HoughCircles(temp, circles, HOUGH_GRADIENT, 1, 200, 100, 50, 0, 150);
+	for (auto& i : circles) {
+		circle(planets, Point(i[0], i[1]), i[2], Scalar(0, 255, 0), 2);
+	}
+	imshow("planetsHoughCircles", planets);
 
 	waitKey(0);
 	destroyAllWindows();
@@ -95,4 +105,22 @@ int main(int argc, char** argv) {
  *      - threshold: 累加器阈值（只有投票数超过此值的直线才被检测到）
  *    调整建议：threshold是最关键参数，值越高检测到的直线越少但越准确
  *
+ * 4. HoughCircles() - 霍夫圆检测
+ *    功能：在灰度图像中检测圆形轮廓，自动找到图像中所有符合条件的圆
+ *    原型：void HoughCircles(InputArray image, OutputArray circles, int method, double dp, double minDist, double param1, double param2, int minRadius=0, int maxRadius=0)
+ *    参数：
+ *      - image: 输入灰度图像（建议先做模糊去噪，否则噪声会导致大量误检测）
+ *      - circles: 输出检测到的圆，每个元素是Vec3f(x, y, radius)，分别是圆心坐标和半径
+ *      - method: 检测方法，目前仅支持 HOUGH_GRADIENT
+ *      - dp: 累加器分辨率，1表示与原图同分辨率，2表示累加器是原图的1/2大小
+ *      - minDist: 检测到的两个圆心之间的最小距离，小于这个值的两个圆会被合并
+ *      - param1: Canny边缘检测的高阈值，低阈值自动设为它的一半
+ *      - param2: 累加器阈值，值越小检测到的圆越多（包含假阳性），值越大检测越严格
+ *      - minRadius: 检测圆的最小半径，小于这个值的圆会被忽略
+ *      - maxRadius: 检测圆的最大半径，大于这个值的圆会被忽略
+ *    调整建议：
+ *      1. 输入前必须对图像做模糊去噪（比如代码里的medianBlur），否则噪声会产生大量误检
+ *      2. minDist是关键参数，要根据你要检测的圆的实际间距来设置，太小会检测到重复的圆，太大会漏检
+ *      3. param2控制检测严格度，先从大往小调，直到检测到所有目标圆
+ *      4. 如果知道目标圆的半径范围，一定要设置minRadius和maxRadius，可以大幅减少误检
  *******************************************************************/
