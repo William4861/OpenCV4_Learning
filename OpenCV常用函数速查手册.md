@@ -645,6 +645,42 @@
 
 - **调整建议**：threshold 是最关键参数，值越高检测到的直线越少但越准确
 
+### 11.4 HoughCircles () - 霍夫圆检测
+
+- **功能**：在灰度图像中检测圆形轮廓，自动找到图像中所有符合条件的圆
+
+- **原型**：`void HoughCircles(InputArray image, OutputArray circles, int method, double dp, double minDist, double param1, double param2, int minRadius=0, int maxRadius=0)`
+
+- **参数**：
+
+    - `image`: 输入灰度图像（建议先做模糊去噪，否则噪声会导致大量误检测）
+
+    - `circles`: 输出检测到的圆，每个元素是 Vec3f (x, y, radius)，分别是圆心坐标和半径
+
+    - `method`: 检测方法，目前仅支持 `HOUGH_GRADIENT`
+
+    - `dp`: 累加器分辨率，1 表示与原图同分辨率，2 表示累加器是原图的 1/2 大小
+
+    - `minDist`: 检测到的两个圆心之间的最小距离，小于这个值的两个圆会被合并
+
+    - `param1`: Canny 边缘检测的高阈值，低阈值自动设为它的一半
+
+    - `param2`: 累加器阈值，值越小检测到的圆越多（包含假阳性），值越大检测越严格
+
+    - `minRadius`: 检测圆的最小半径，小于这个值的圆会被忽略
+
+    - `maxRadius`: 检测圆的最大半径，大于这个值的圆会被忽略
+
+- **调整建议**：
+
+    1. 输入前必须对图像做模糊去噪（比如 medianBlur），否则噪声会产生大量误检
+
+    2. `minDist`是关键参数，要根据你要检测的圆的实际间距来设置，太小会检测到重复的圆，太大会漏检
+
+    3. `param2`控制检测严格度，先从大往小调，直到检测到所有目标圆
+
+    4. 如果知道目标圆的半径范围，一定要设置`minRadius`和`maxRadius`，可以大幅减少误检
+
 ---
 
 ## 重要注意事项汇总
