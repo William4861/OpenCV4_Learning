@@ -3,6 +3,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/解决方案项/">
+    <File Path="OpenCV常用函数速查手册.md" />
+  </Folder>
   <Project Path="001_基本读写存操作/OpenCV4_001.vcxproj" Id="ae542b54-9695-4d12-acfb-6365f9536dcb" />
   <Project Path="002_Mat类的属性、构造、遍历/OpenCV4_002.vcxproj" Id="791e0f64-84a3-4894-b37b-0be4fb224f90" />
   <Project Path="003_图像算术操作/OpenCV4_003.vcxproj" Id="538e73f7-280a-4984-ab79-4464172b0a54" />

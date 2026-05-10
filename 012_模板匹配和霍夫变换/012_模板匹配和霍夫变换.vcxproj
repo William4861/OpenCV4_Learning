@@ -131,6 +131,7 @@
     <ClCompile Include="OpenCV4_012.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\Calendar.png" />
     <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\Wulin.png" />
     <Image Include="..\..\..\opencv\sources\samples\data\MyPhotos\WulinTemplate.png" />
   </ItemGroup>
