@@ -1,6 +1,7 @@
 #include<iostream>
 #include<opencv2/opencv.hpp>
 #include<vector>
+#include<string>
 
 using namespace std;
 using namespace cv;
@@ -45,7 +46,7 @@ int main(int argc, char** argv) {
 	}
 	imshow("mansionShi-TomasiRes", mansion);
 
-	//SIFT图像特征提取
+	//SIFT图像特征检测与提取
 	Ptr<SIFT> sift = SIFT::create(0,3,0.04,10,1.6);//与默认值一致，参数空着也一样
 	vector<KeyPoint> kps;
 	Mat descriptors;
@@ -63,7 +64,7 @@ int main(int argc, char** argv) {
 	drawKeypoints(mansion2, kps, mansion2, Scalar(0, 0, 255));
 	imshow("mansion2FASTRes", mansion2);
 
-	//ORB图像特征提取
+	//ORB图像特征检测与提取
 	Mat mansion3 = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/mansion.png");
 	cvtColor(mansion3, gray, COLOR_BGR2GRAY);
 	imshow("mansion3", mansion3);
@@ -73,6 +74,15 @@ int main(int argc, char** argv) {
 	drawKeypoints(mansion3, kps, mansion3, Scalar(120, 120, 0));
 	imshow("mansion3ORBRes", mansion3);
 
+	//HOG特征提取
+	Mat passenger = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/Passenger.jpg");
+	cvtColor(passenger, gray, COLOR_BGR2GRAY);
+	imshow("passenger", passenger);
+
+	HOGDescriptor hog(Size(64,128),Size(16,16),Size(8,8),Size(8,8),9);
+	vector<float> hogDescriptors;
+	hog.compute(gray, hogDescriptors);
+	cout << "HOG's dimension: " << hogDescriptors.size() << endl;
 
 	waitKey(0);
 	destroyAllWindows();

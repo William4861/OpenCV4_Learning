@@ -130,6 +130,7 @@
   <ItemGroup>
     <Image Include="..\MyPhotos\checkBoard.png" />
     <Image Include="..\MyPhotos\mansion.png" />
+    <Image Include="..\MyPhotos\Passenger.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCV4_013.cpp" />
