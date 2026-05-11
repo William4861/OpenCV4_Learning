@@ -1,5 +1,6 @@
 #include<iostream>
 #include<opencv2/opencv.hpp>
+#include<vector>
 
 using namespace std;
 using namespace cv;
@@ -7,6 +8,7 @@ using namespace cv;
 //图像特征提取与描述
 
 int main(int argc, char** argv) {
+	//Harris角点检测
 	Mat checkBoard = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/checkBoard.png");
 	if (checkBoard.empty()) {
 		return -1;
@@ -28,6 +30,20 @@ int main(int argc, char** argv) {
 		}
 	}
 	imshow("checkBoardHarrisRes", checkBoard);
+
+	//Shi-Tomasi角点检测
+	Mat mansion = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/mansion.png");
+	imshow("mansion", mansion);
+	cvtColor(mansion, gray, COLOR_BGR2GRAY);
+	imshow("mansionGray", gray);
+
+	vector<Point2f> corners;
+	goodFeaturesToTrack(gray, corners, 1000, 0.01, 10);
+	for (auto& c : corners) {
+		circle(mansion, c, 1, Scalar(0, 255, 0), 1);
+	}
+	imshow("mansionShi-TomasiRes", mansion);
+
 
 	waitKey(0);
 	destroyAllWindows();
@@ -61,4 +77,32 @@ int main(int argc, char** argv) {
  *    功能：访问 Harris 响应图矩阵的值
  *    说明：cornerHarris 输出是 CV_32F 浮点型图像，必须用 <float> 访问
  *
+ * 3. goodFeaturesToTrack() - Shi-Tomasi 角点检测
+ *    功能：基于 Harris 角点改进的角点检测算法，效果更稳定、角点分布更均匀
+ *    原型：void goodFeaturesToTrack(
+ *        InputArray image,
+ *        OutputArray corners,
+ *        int maxCorners,
+ *        double qualityLevel,
+ *        double minDistance,
+ *        InputArray mask = noArray(),
+ *        int blockSize = 3,
+ *        bool useHarrisDetector = false,
+ *        double k = 0.04
+ *    );
+ *    参数：
+ *      - image: 输入图像，必须是 8位 或 32位 单通道灰度图
+ *      - corners: 输出检测到的角点，类型为 vector<Point2f>
+ *      - maxCorners: 最多检测多少个角点（限制数量，防止太多）
+ *      - qualityLevel: 质量系数，一般 0.01~0.1，值越大筛选越严格，角点越少
+ *      - minDistance: 两个角点之间的最小像素距离，防止角点扎堆
+ *      - mask: 可选掩码，只在掩码非零区域检测角点
+ *      - blockSize: 计算局部特征的窗口大小，默认 3
+ *      - useHarrisDetector: 是否使用 Harris 算法，false 表示使用 Shi-Tomasi
+ *      - k: Harris 算法的自由参数，默认 0.04
+ *    调整建议：
+ *      - maxCorners：根据需求设置，一般 100~2000
+ *      - qualityLevel：0.01 是通用值，角点太少就调小，太多就调大
+ *      - minDistance：越大角点越稀疏，越小越密集，一般 5~20
+ *      - Shi-Tomasi 比 Harris 更稳定，优先使用
  *******************************************************************/

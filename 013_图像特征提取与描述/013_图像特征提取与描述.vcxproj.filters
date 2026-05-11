@@ -18,6 +18,9 @@
     <Image Include="..\MyPhotos\checkBoard.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="..\MyPhotos\mansion.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCV4_013.cpp">
