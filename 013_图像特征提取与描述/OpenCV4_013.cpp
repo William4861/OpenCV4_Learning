@@ -52,6 +52,16 @@ int main(int argc, char** argv) {
 	drawKeypoints(mansion, kps, mansion, Scalar(255, 0, 0),DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 	imshow("mansionSIFTRes", mansion);
 
+	//FAST角点检测
+	Mat mansion2 = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/mansion.png");
+	cvtColor(mansion2, gray, COLOR_BGR2GRAY);
+	imshow("mansion2Gray", gray);
+
+	Ptr<FastFeatureDetector> fast = FastFeatureDetector::create();
+	fast->detect(gray, kps);
+	drawKeypoints(mansion2, kps, mansion2, Scalar(0, 0, 255));
+	imshow("mansion2FASTRes", mansion2);
+
 
 	waitKey(0);
 	destroyAllWindows();
@@ -151,5 +161,26 @@ int main(int argc, char** argv) {
  *      - color: 绘制颜色
  *      - flags: 绘制风格
  *        * DRAW_RICH_KEYPOINTS：绘制带方向、带大小的圆形特征点（最常用）
+ *
+ * 7. FastFeatureDetector::create() - 创建FAST角点检测器
+ *    功能：创建**超高速度**的角点检测器，适合实时视频、实时检测
+ *    原型：static Ptr<FastFeatureDetector> create(
+ *        int threshold = 10,
+ *        bool nonmaxSuppression = true
+ *    );
+ *    参数：
+ *      - threshold: 亮度差阈值（0~255）
+ *        越大 → 角点越少
+ *        越小 → 角点越多（容易误检）
+ *        常用：10 ~ 20
+ *      - nonmaxSuppression: 是否开启非极大值抑制
+ *        true = 去重，角点更均匀（默认开启）
+ *        false = 保留所有候选点，会扎堆
+ *
+ * 8. fast->detect() - 只检测关键点（不计算描述子）
+ *    功能：只提取角点位置，速度极快
+ *    参数：
+ *      - image: 输入灰度图
+ *      - keypoints: 输出角点 vector<KeyPoint>
  *
  *******************************************************************/
