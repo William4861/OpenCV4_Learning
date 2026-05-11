@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include<opencv2/opencv.hpp>
 #include<vector>
 #include<string>
@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
 	HOGDescriptor hog(Size(64,128),Size(16,16),Size(8,8),Size(8,8),9);
 	vector<float> hogDescriptors;
 	hog.compute(gray, hogDescriptors);
-	cout << "HOG's dimension: " << hogDescriptors.size() << endl;
+	cout << "HOG的特征维度： " << hogDescriptors.size() << endl;
 
 	waitKey(0);
 	destroyAllWindows();
