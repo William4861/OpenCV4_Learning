@@ -44,6 +44,14 @@ int main(int argc, char** argv) {
 	}
 	imshow("mansionShi-TomasiRes", mansion);
 
+	//SIFT图像特征提取
+	Ptr<SIFT> sift = SIFT::create(0,3,0.04,10,1.6);//与默认值一致，参数空着也一样
+	vector<KeyPoint> kps;
+	Mat descriptors;
+	sift->detectAndCompute(gray, noArray(), kps, descriptors);
+	drawKeypoints(mansion, kps, mansion, Scalar(255, 0, 0),DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+	imshow("mansionSIFTRes", mansion);
+
 
 	waitKey(0);
 	destroyAllWindows();
@@ -105,4 +113,43 @@ int main(int argc, char** argv) {
  *      - qualityLevel：0.01 是通用值，角点太少就调小，太多就调大
  *      - minDistance：越大角点越稀疏，越小越密集，一般 5~20
  *      - Shi-Tomasi 比 Harris 更稳定，优先使用
+ *
+ * 4. SIFT::create() - 创建 SIFT 特征检测器
+ *    功能：创建 SIFT 尺度不变特征提取器，用于提取图像关键点与描述子
+ *    原型：static Ptr<SIFT> create(
+ *        int nfeatures = 0,
+ *        int nOctaveLayers = 3,
+ *        double contrastThreshold = 0.04,
+ *        double edgeThreshold = 10,
+ *        double sigma = 1.6
+ *    );
+ *    参数：
+ *      - nfeatures: 保留的最佳特征点数量（0=不限制）
+ *      - nOctaveLayers: 每个金字塔组的层数，默认 3
+ *      - contrastThreshold: 对比度阈值，过滤弱特征点，越大过滤越多
+ *      - edgeThreshold: 边缘阈值，过滤边缘点，越大保留越多边缘特征
+ *      - sigma: 第一层高斯模糊的系数，默认 1.6
+ *    调整建议：
+ *      - 一般直接用默认参数即可：create(0,3,0.04,10,1.6)
+ *      - 特征点太多：调大 contrastThreshold
+ *      - 特征点太少：调小 contrastThreshold
+ *
+ * 5. sift->detectAndCompute() - 检测关键点 + 计算描述子
+ *    功能：一步完成特征点检测和描述子计算
+ *    参数：
+ *      - image: 输入灰度图像
+ *      - mask: 掩码（noArray() 表示全图）
+ *      - kps: 输出关键点 vector<KeyPoint>
+ *      - descriptors: 输出描述子矩阵（每行一个 128 维 SIFT 描述子）
+ *
+ * 6. drawKeypoints() - 绘制特征点
+ *    功能：在图像上画出检测到的关键点
+ *    参数：
+ *      - image: 原始图像
+ *      - keypoints: 关键点集合
+ *      - outImage: 输出绘制后的图像
+ *      - color: 绘制颜色
+ *      - flags: 绘制风格
+ *        * DRAW_RICH_KEYPOINTS：绘制带方向、带大小的圆形特征点（最常用）
+ *
  *******************************************************************/
