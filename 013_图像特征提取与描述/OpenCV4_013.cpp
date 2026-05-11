@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
 	//Harris角点检测
 	Mat checkBoard = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/checkBoard.png");
 	if (checkBoard.empty()) {
+		cout << "图像读取错误" << endl;
 		return -1;
 	}
 	imshow("checkBoard", checkBoard);
@@ -61,6 +62,16 @@ int main(int argc, char** argv) {
 	fast->detect(gray, kps);
 	drawKeypoints(mansion2, kps, mansion2, Scalar(0, 0, 255));
 	imshow("mansion2FASTRes", mansion2);
+
+	//ORB图像特征提取
+	Mat mansion3 = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/mansion.png");
+	cvtColor(mansion3, gray, COLOR_BGR2GRAY);
+	imshow("mansion3", mansion3);
+
+	Ptr<ORB> orb = ORB::create();
+	orb->detectAndCompute(gray, noArray(), kps, descriptors);
+	drawKeypoints(mansion3, kps, mansion3, Scalar(120, 120, 0));
+	imshow("mansion3ORBRes", mansion3);
 
 
 	waitKey(0);
@@ -183,4 +194,31 @@ int main(int argc, char** argv) {
  *      - image: 输入灰度图
  *      - keypoints: 输出角点 vector<KeyPoint>
  *
+ * 9. ORB::create() - 创建 ORB 特征检测器
+ *    功能：**实时、免费、工业级最常用**的图像特征提取算法
+ *          结合 FAST 角点 + 二进制描述子，速度极快、效果好
+ *    原型：static Ptr<ORB> create(
+ *        int nfeatures = 500,
+ *        float scaleFactor = 1.2f,
+ *        int nlevels = 8,
+ *        int edgeThreshold = 31,
+ *        int firstLevel = 0,
+ *        int WTA_K = 2,
+ *        int scoreType = ORB::HARRIS_SCORE,
+ *        int patchSize = 31,
+ *        int fastThreshold = 20
+ *    );
+ *    参数（重点）：
+ *      - nfeatures: 最多提取多少个特征点（默认 500）
+ *      - scaleFactor: 金字塔缩放系数（默认 1.2）
+ *      - nlevels: 金字塔层数（默认 8）
+ *      - edgeThreshold: 边缘忽略阈值（默认 31）
+ *      - fastThreshold: FAST 角点阈值
+ *    调整建议：
+ *      - 直接 ORB::create() 用默认参数就非常好用
+ *      - 想提取更多特征：把 nfeatures 改大（如 1000, 2000）
+ *      - 实时场景（视频/摄像头）：ORB 是首选
+ *
+ * 10. orb->detectAndCompute()
+ *    功能：一步检测特征点 + 计算描述子（同 SIFT）
  *******************************************************************/
