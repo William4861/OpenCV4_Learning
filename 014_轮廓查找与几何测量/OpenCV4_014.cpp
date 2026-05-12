@@ -66,6 +66,23 @@ int main(int argc, char** argv) {
 	}
 	imshow("lena过滤轮廓的外接矩形（带角度）", res4);
 
+	//计算轮廓矩并画出轮廓中心
+	Mat res5 = lena.clone();
+	for (auto& cot : contours) {
+		double area = contourArea(cot);
+		if (area < 100) continue;
+		//1.计算轮廓矩
+		Moments m = moments(cot);
+		//2.求重心
+		int cx = m.m10 / m.m00;
+		int cy = m.m01 / m.m00;
+		//3.画中心点
+		circle(res5, Point(cx, cy), 2, Scalar(255, 0, 0), 2);
+
+		drawContours(res5, cot, 0, Scalar(0, 255, 0), 1);
+	}
+	imshow("lena过滤轮廓的中心", res5);
+
 	waitKey(0);
 	destroyAllWindows();
 
@@ -167,4 +184,21 @@ int main(int argc, char** argv) {
  *    参数：
  *      - ptrs: 用于接收 4 个顶点的数组（Point2f ptrs[4]）
  *
+ * 8. moments() - 计算轮廓的图像矩
+ *    功能：计算轮廓/区域的几何矩（零阶矩、一阶矩、二阶矩等），用于求重心、面积、方向等
+ *    原型：Moments moments(InputArray array, bool binaryImage = false);
+ *    参数：
+ *      - array: 输入轮廓（单个 vector<Point>）
+ *    返回值：
+ *      - Moments 结构体，包含 m00、m10、m01 等矩信息
+ *
+ * 9. 轮廓重心计算公式
+ *    功能：通过图像矩计算轮廓的中心坐标
+ *    公式：
+ *      cx = m10 / m00
+ *      cy = m01 / m00
+ *    说明：
+ *      m00：零阶矩 = 轮廓面积
+ *      m10：一阶矩（x 方向）
+ *      m01：一阶矩（y 方向）
  *******************************************************************/
