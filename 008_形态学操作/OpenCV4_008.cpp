@@ -23,7 +23,8 @@ int main(int argc, char** argv) {
 
 	//开运算操作 效果：消除白噪点
 	Mat openSample = imread("D:/code_work/VisualStudio_Project/OpenCV_Learning/MyPhotos/OpenSample.png");
-	Mat kernel1 = (Mat_<uchar>::ones(Size(20, 20)));//先创建20*20的核结构
+	//Mat kernel1 = (Mat_<uchar>::ones(Size(20, 20)));//先创建20*20的核结构
+	Mat kernel1 = getStructuringElement(MORPH_RECT, Size(20, 20));
 	Mat openRes;
 	morphologyEx(openSample, openRes, MORPH_OPEN ,kernel1);//进行开运算
 	imshow("openSample", openSample);
@@ -90,4 +91,19 @@ int main(int argc, char** argv) {
  *      - kernel: 形态学核
  *      - iterations: 操作迭代次数
  *    调整建议：核的大小决定了能处理的噪点/孔洞的最大尺寸
+ * 
+ * 5. getStructuringElement() - 获取形态学操作的结构元素（核）
+ *    功能：生成自定义形状和大小的形态学核（卷积核），专门用于腐蚀、膨胀、开运算、闭运算等
+ *    原型：Mat getStructuringElement(int shape, Size ksize);
+ *    参数：
+ *      - shape: 核的形状
+ *          MORPH_RECT    : 矩形核（最常用）
+ *          MORPH_ELLIPSE : 椭圆/圆形核
+ *          MORPH_CROSS   : 十字形核
+ *      - ksize: 核的尺寸 Size(w, h)，必须是**正奇数**（如 3,5,7,9...）
+ *    返回值：
+ *      - 生成好的形态学核 Mat，可直接传给 erode/dilate/morphologyEx
+ *    调整建议：
+ *      - 核越大，腐蚀/膨胀效果越强
+ *      - 矩形核适合规则物体，椭圆核适合圆形物体
  *******************************************************************/
