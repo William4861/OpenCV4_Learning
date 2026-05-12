@@ -20,6 +20,10 @@ int main(int argc, char** argv) {
 	Mat bin;
 	threshold(gray, bin, 0, 255, THRESH_OTSU);
 	imshow("lenaBinary", bin);
+	//自适应二值化
+	Mat bin2;
+	adaptiveThreshold(gray, bin2, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 11, 2);
+	imshow("lenaAdaptiveBinary", bin2);
 	//2.定义轮廓容器
 	vector<vector<Point>> contours;
 	vector<Vec4i> heirachy;
@@ -201,4 +205,30 @@ int main(int argc, char** argv) {
  *      m00：零阶矩 = 轮廓面积
  *      m10：一阶矩（x 方向）
  *      m01：一阶矩（y 方向）
+ * 
+ * 10. adaptiveThreshold() - 自适应阈值二值化
+ *    功能：对**光照不均匀**的图像进行局部二值化，比全局 threshold 效果好得多
+ *    原型：void adaptiveThreshold(
+ *        InputArray src,
+ *        OutputArray dst,
+ *        double maxValue,
+ *        int adaptiveMethod,
+ *        int thresholdType,
+ *        int blockSize,
+ *        double C
+ *    );
+ *    参数：
+ *      - src: 输入灰度图
+ *      - dst: 输出二值图
+ *      - maxValue: 最大值，固定 255
+ *      - adaptiveMethod: 自适应计算方式
+ *          ADAPTIVE_THRESH_GAUSSIAN_C：高斯加权均值（最常用）
+ *      - thresholdType: 二值化类型，固定 THRESH_BINARY
+ *      - blockSize: 局部窗口大小，必须是**奇数**（3/5/7/9/11）
+ *      - C: 常数偏移量，一般设 2~5，越大亮区域越多
+ *    调整建议：
+ *      - 光照不均、阴影、反光 → 必须用自适应二值化
+ *      - blockSize 越大，轮廓越平滑，但细节丢失
+ *      - C 越大，图像越亮
+ *
  *******************************************************************/
