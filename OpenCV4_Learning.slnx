@@ -31,5 +31,6 @@
   <Project Path="011_边缘检测/011_边缘检测.vcxproj" Id="7b687161-342e-4dd5-a224-6c3d5c21c217" />
   <Project Path="012_模板匹配和霍夫变换/012_模板匹配和霍夫变换.vcxproj" Id="e91e026e-97bd-4a79-8fa5-94afe389d53c" />
   <Project Path="013_图像特征提取与描述/013_图像特征提取与描述.vcxproj" Id="d357537e-b8b6-47fe-85cf-1dc854405662" />
+  <Project Path="014_轮廓查找与几何测量/014_轮廓查找与几何测量.vcxproj" Id="60c80a25-a204-4a1f-805c-7fc5e2cb656d" />
   <Project Path="Test_验证OpenCV环境配置成功/OpenCV4_Test.vcxproj" Id="14fe8daf-f65a-48d4-b61b-7d575576bff6" />
 </Solution>
