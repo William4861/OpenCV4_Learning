@@ -34,7 +34,9 @@
 
 12. [角点与特征检测](#12-角点与特征检测)
 
-13. [重要注意事项](#重要注意事项汇总)
+13. [图像二值化与轮廓检测](#13-图像二值化与轮廓检测)
+
+14. [重要注意事项](#重要注意事项汇总)
 
 ---
 
@@ -403,19 +405,33 @@
 
 ## 7. 形态学操作
 
-### 7.1 getStructuringElement () - 创建形态学核
+### 7.1 getStructuringElement () - 获取形态学操作的结构元素（核）
 
-- **功能**：创建形态学操作的结构元素
+- **功能**：生成自定义形状和大小的形态学核（卷积核），专门用于腐蚀、膨胀、开运算、闭运算等
 
-- **用法**：`Mat kernel = getStructuringElement(MORPH_RECT, Size(3,3));`
+- **原型**：`Mat getStructuringElement(int shape, Size ksize);`
 
-- **形状**：
+- **参数**：
 
-    - `MORPH_RECT`: 矩形核
+    - `shape`: 核的形状
 
-    - `MORPH_ELLIPSE`: 椭圆核
+        - `MORPH_RECT`: 矩形核（最常用）
 
-    - `MORPH_CROSS`: 十字核
+        - `MORPH_ELLIPSE`: 椭圆 / 圆形核
+
+        - `MORPH_CROSS`: 十字形核
+
+    - `ksize`: 核的尺寸 Size (w, h)，必须是**正奇数**（如 3,5,7,9...）
+
+- **返回值**：
+
+    - 生成好的形态学核 Mat，可直接传给 erode/dilate/morphologyEx
+
+- **调整建议**：
+
+    - 核越大，腐蚀 / 膨胀效果越强
+
+    - 矩形核适合规则物体，椭圆核适合圆形物体
 
 ### 7.2 erode () - 腐蚀
 
@@ -866,7 +882,203 @@
 
 ---
 
-## 13. 重要注意事项汇总
+## 13. 图像二值化与轮廓检测
+
+### 13.1 threshold () - 图像二值化
+
+- **功能**：将灰度图转为黑白二值图像，像素大于阈值为白色，否则为黑色
+
+- **原型**：`double threshold(InputArray src, OutputArray dst, double thresh, double maxval, int type)`
+
+- **参数**：
+
+    - `src`: 输入灰度图像
+
+    - `dst`: 输出二值图像
+
+    - `thresh`: 手动设置的阈值（使用 OTSU 时填 0 即可，自动计算）
+
+    - `maxval`: 最大值，一般填 255
+
+    - `type`: 二值化方式
+
+        - `THRESH_BINARY`: 大于阈值为 maxval，否则为 0
+
+        - `THRESH_OTSU`: 自动计算最佳阈值（最常用）
+
+- **调整建议**：
+
+    - 找轮廓前必须二值化，OTSU 全自动最省心
+
+### 13.2 adaptiveThreshold () - 自适应阈值二值化
+
+- **功能**：对**光照不均匀**的图像进行局部二值化，比全局 threshold 效果好得多
+
+- **原型**：`void adaptiveThreshold(InputArray src, OutputArray dst, double maxValue, int adaptiveMethod, int thresholdType, int blockSize, double C)`
+
+- **参数**：
+
+    - `src`: 输入灰度图
+
+    - `dst`: 输出二值图
+
+    - `maxValue`: 最大值，固定 255
+
+    - `adaptiveMethod`: 自适应计算方式
+
+        - `ADAPTIVE_THRESH_GAUSSIAN_C`: 高斯加权均值（最常用）
+
+    - `thresholdType`: 二值化类型，固定 THRESH_BINARY
+
+    - `blockSize`: 局部窗口大小，必须是**奇数**（3/5/7/9/11）
+
+    - `C`: 常数偏移量，一般设 2~5，越大亮区域越多
+
+- **调整建议**：
+
+    - 光照不均、阴影、反光 → 必须用自适应二值化
+
+    - blockSize 越大，轮廓越平滑，但细节丢失
+
+    - C 越大，图像越亮
+
+### 13.3 findContours () - 查找图像轮廓
+
+- **功能**：从二值图像中提取所有物体的轮廓
+
+- **原型**：`void findContours(InputArray image, OutputArray contours, OutputArray hierarchy, int mode, int method, Point offset = Point())`
+
+- **参数**：
+
+    - `image`: 输入二值图像（黑底白物体）
+
+    - `contours`: 输出轮廓集合 vector<vector>
+
+    - `hierarchy`: 输出轮廓层级信息 vector
+
+    - `mode`: 轮廓检索模式
+
+        - `RETR_EXTERNAL`: 只提取最外层轮廓（最常用）
+
+        - `RETR_TREE`: 提取所有轮廓及层级
+
+    - `method`: 轮廓逼近方法
+
+        - `CHAIN_APPROX_SIMPLE`: 压缩水平 / 垂直 / 斜线段，节省内存（推荐）
+
+### 13.4 drawContours () - 绘制轮廓
+
+- **功能**：在原图上画出检测到的轮廓
+
+- **原型**：`void drawContours(InputOutputArray image, InputArray contours, int contourIdx, const Scalar& color, int thickness = 1, int lineType = LINE_8)`
+
+- **参数**：
+
+    - `image`: 要画轮廓的图像
+
+    - `contours`: 轮廓集合
+
+    - `contourIdx`: 要画第几个轮廓，-1 = 画全部
+
+    - `color`: 轮廓颜色
+
+    - `thickness`: 线条宽度
+
+### 13.5 contourArea () - 计算轮廓面积
+
+- **功能**：计算单个轮廓的像素面积大小，常用于过滤小噪点轮廓
+
+- **原型**：`double contourArea(InputArray contour, bool oriented = false)`
+
+- **参数**：
+
+    - `contour`: 单个轮廓（vector）
+
+    - `oriented`: 方向相关，默认 false 即可
+
+- **返回值**：
+
+    - 轮廓包围的面积（double 类型）
+
+- **调整建议**：
+
+    - 噪点轮廓面积通常很小，设置最小面积阈值（如 100）即可过滤
+
+### 13.6 boundingRect () - 计算轮廓的正外接矩形（无角度、轴对齐）
+
+- **功能**：输入一个轮廓，返回**不旋转、水平竖直对齐**的最小包围矩形
+
+- **原型**：`Rect boundingRect( InputArray points );`
+
+- **参数**：
+
+    - `points`: 输入轮廓（单个 vector）
+
+- **返回值**：
+
+    - Rect 类型，包含 x, y, width, height
+
+### 13.7 minAreaRect () - 寻找轮廓的最小外接矩形（带旋转角度）
+
+- **功能**：根据输入轮廓，计算能包围该轮廓的**最小面积矩形**（带旋转角度）
+
+- **原型**：`RotatedRect minAreaRect(InputArray points);`
+
+- **参数**：
+
+    - `points`: 输入轮廓（单个 vector）
+
+- **返回值**：
+
+    - RotatedRect 类型，包含：中心坐标 center、尺寸 size、旋转角度 angle
+
+### 13.8 RotatedRect::points () - 获取最小外接矩形的四个顶点
+
+- **功能**：从 RotatedRect 中取出矩形的 4 个角点坐标（Point2f 类型）
+
+- **用法**：`rRect.points(ptrs);`
+
+- **参数**：
+
+    - `ptrs`: 用于接收 4 个顶点的数组（Point2f ptrs [4]）
+
+### 13.9 moments () - 计算轮廓的图像矩
+
+- **功能**：计算轮廓 / 区域的几何矩（零阶矩、一阶矩、二阶矩等），用于求重心、面积、方向等
+
+- **原型**：`Moments moments(InputArray array, bool binaryImage = false);`
+
+- **参数**：
+
+    - `array`: 输入轮廓（单个 vector）
+
+- **返回值**：
+
+    - Moments 结构体，包含 m00、m10、m01 等矩信息
+
+### 13.10 轮廓重心计算公式
+
+- **功能**：通过图像矩计算轮廓的中心坐标
+
+- **公式**：
+
+    ```Plain Text
+    
+    cx = m10 / m00
+    cy = m01 / m00
+    ```
+
+- **说明**：
+
+    - `m00`: 零阶矩 = 轮廓面积
+
+    - `m10`: 一阶矩（x 方向）
+
+    - `m01`: 一阶矩（y 方向）
+
+---
+
+## 14. 重要注意事项汇总
 
 1. **BGR 顺序**：OpenCV 读取的彩色图是 BGR 顺序，不是 RGB，和其他库对接时要注意转换
 
