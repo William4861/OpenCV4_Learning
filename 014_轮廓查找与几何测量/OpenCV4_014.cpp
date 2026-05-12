@@ -39,6 +39,32 @@ int main(int argc, char** argv) {
 	}
 	imshow("lena过滤噪点轮廓", res2);
 
+	//获取并绘制轮廓的正外接矩形
+	Mat res3 = lena.clone();
+	for (auto& cot : contours) {
+		double area = contourArea(cot);
+		if (area < 100) continue;
+		Rect r = boundingRect(cot);
+		drawContours(res3, cot, 0, Scalar(0, 0, 255), 2);
+		rectangle(res3, r, Scalar(0, 0, 0), 2);
+	}
+	imshow("lena过滤轮廓的正外接矩形", res3);
+
+	//获取并绘制轮廓的外接矩形（带角度）
+	Mat res4 = lena.clone();
+	for (auto& cot : contours) {
+		double area = contourArea(cot);
+		if (area < 100) continue;
+		RotatedRect rRect = minAreaRect(cot);
+		Point2f ptrs[4];
+		rRect.points(ptrs);
+		drawContours(res4, cot, 0, Scalar(0, 255, 0), 2);
+		for (int i = 0; i < 4; i++) {
+			line(res4, ptrs[i], ptrs[(i + 1) % 4], Scalar(255, 0, 0), 2);
+		}
+
+	}
+	imshow("lena过滤轮廓的外接矩形（带角度）", res4);
 
 	waitKey(0);
 	destroyAllWindows();
@@ -117,4 +143,28 @@ int main(int argc, char** argv) {
  *      - 轮廓包围的面积（double 类型）
  *    调整建议：
  *      - 噪点轮廓面积通常很小，设置最小面积阈值（如 100）即可过滤
+ * 
+ * 5. boundingRect() - 计算轮廓的正外接矩形（无角度、轴对齐）
+ *    功能：输入一个轮廓，返回**不旋转、水平竖直对齐**的最小包围矩形
+ *    原型：Rect boundingRect( InputArray points );
+ *    参数：
+ *      - points: 输入轮廓（单个 vector<Point>）
+ *    返回值：
+ *      - Rect 类型，包含 x, y, width, height
+ *
+ * 
+ * 6. minAreaRect() - 寻找轮廓的最小外接矩形（带旋转角度）
+ *    功能：根据输入轮廓，计算能包围该轮廓的**最小面积矩形**（带旋转角度）
+ *    原型：RotatedRect minAreaRect(InputArray points);
+ *    参数：
+ *      - points: 输入轮廓（单个 vector<Point>）
+ *    返回值：
+ *      - RotatedRect 类型，包含：中心坐标 center、尺寸 size、旋转角度 angle
+ *
+ * 7. RotatedRect::points() - 获取最小外接矩形的四个顶点
+ *    功能：从 RotatedRect 中取出矩形的 4 个角点坐标（Point2f 类型）
+ *    用法：rRect.points(ptrs);
+ *    参数：
+ *      - ptrs: 用于接收 4 个顶点的数组（Point2f ptrs[4]）
+ *
  *******************************************************************/
