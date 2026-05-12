@@ -30,6 +30,15 @@ int main(int argc, char** argv) {
 	drawContours(res, contours, -1, Scalar(0, 255, 0), 2);//-1:画所有轮廓
 	imshow("lena轮廓", res);
 
+	//通过计算轮廓面积过滤噪点
+	Mat res2 = lena.clone();
+	for (auto& cnt : contours) {
+		double area = contourArea(cnt);
+		if (area < 100) continue;
+		drawContours(res2, cnt, 0, Scalar(255, 0, 0), 2);
+	}
+	imshow("lena过滤噪点轮廓", res2);
+
 
 	waitKey(0);
 	destroyAllWindows();
@@ -95,4 +104,17 @@ int main(int argc, char** argv) {
  *      - color: 轮廓颜色
  *      - thickness: 线条宽度
  *
+ * 4. contourArea() - 计算轮廓面积
+ *    功能：计算单个轮廓的像素面积大小，常用于过滤小噪点轮廓
+ *    原型：double contourArea(
+ *        InputArray contour,
+ *        bool oriented = false
+ *    );
+ *    参数：
+ *      - contour: 单个轮廓（vector<Point>）
+ *      - oriented: 方向相关，默认 false 即可
+ *    返回值：
+ *      - 轮廓包围的面积（double 类型）
+ *    调整建议：
+ *      - 噪点轮廓面积通常很小，设置最小面积阈值（如 100）即可过滤
  *******************************************************************/
