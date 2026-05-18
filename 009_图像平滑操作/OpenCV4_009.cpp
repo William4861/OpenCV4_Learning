@@ -27,6 +27,11 @@ int main(int argc, char** argv) {
 	medianBlur(dogSp, dogSpMedianRes, 5);// 输入参数：输入图像、输出图像、核半径
 	imshow("dogSpMedianRes", dogSpMedianRes);
 
+	//双边滤波
+	Mat dogBilRes;
+	bilateralFilter(dogGaus, dogBilRes, 5, 50, 50);
+	imshow("dogBilRes", dogBilRes);
+
 	waitKey(0);
 	destroyAllWindows();
 
@@ -68,4 +73,25 @@ int main(int argc, char** argv) {
  *      - ksize: 核边长（必须为大于1的正奇数，如3、5、7，注意这里是单个整数）
  *    特点：非线性滤波，边缘保留能力强，但计算速度比线性滤波慢
  *    调整建议：核越大，去噪能力越强，但会丢失更多图像细节
+ * 
+ * 4. bilateralFilter() - 双边滤波
+ *    功能：**保边去噪**滤波，既能去除噪声，又能保留图像边缘（不会模糊边界）
+ *    原型：void bilateralFilter(
+ *        InputArray src,
+ *        OutputArray dst,
+ *        int d,
+ *        double sigmaColor,
+ *        double sigmaSpace,
+ *        int borderType = BORDER_DEFAULT
+ *    );
+ *    参数：
+ *      - src: 输入图像（彩色/灰度均可）
+ *      - dst: 输出滤波后图像
+ *      - d: 滤波核直径，推荐 5~9（太大速度变慢）
+ *      - sigmaColor: 颜色相似度阈值，越大越会把更多颜色视为同类
+ *      - sigmaSpace: 空间距离阈值，越大滤波范围越广
+ *    调整建议：
+ *      - 人像磨皮、保边去噪首选双边滤波
+ *      - 常用参数：d=5，sigmaColor=50，sigmaSpace=50
+ *      - sigma 值越大，模糊效果越强，但边缘依然保留
  *******************************************************************/
